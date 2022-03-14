@@ -7,9 +7,10 @@ ruuvi.on('found', (tag) => {
   tag.on('updated', (data) => {
     console.log(`${tag.id}: ${JSON.stringify(data)}`);
 
-    const body = { message: `temperature: ${data.temperature}` };
+    //const body = { message: `temperature: ${data.temperature}` };
+    const body = { x: data.accelerationX, y: data.accelerationY, z: data.accelerationZ };
 
-    fetch('http://95.216.154.69:9000/api/chats', {
+    fetch('http://95.216.143.30:9000/api/acceleration', {
       method: 'post',
       body: JSON.stringify(body),
       headers: { 'Content-Type': 'application/json' },
