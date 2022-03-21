@@ -1,5 +1,6 @@
 const ruuvi = require('node-ruuvitag');
 const fetch = require('node-fetch');
+const backend_url = "https://koodi101backend.herokuapp.com";
 
 ruuvi.on('found', (tag) => {
   console.log(`Found RuuviTag with id: ${tag.id}`);
@@ -11,12 +12,12 @@ ruuvi.on('found', (tag) => {
     const acceleration = { x: data.accelerationX, y: data.accelerationY, z: data.accelerationZ};
     const temperature = {temp: data.temperature};
 
-    fetch('http://95.216.143.30:9000/api/acceleration', {
+    fetch(`${backend_url}/api/acceleration`, {
       method: 'post',
       body: JSON.stringify(acceleration),
       headers: { 'Content-Type': 'application/json' },
     });
-    fetch('http://95.216.143.30:9000/api/temperature', {
+    fetch(`${backend_url}/api/temperature`, {
       method: 'post',
       body: JSON.stringify(temperature),
       headers: { 'Content-Type': 'application/json' },
